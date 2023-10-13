@@ -1,20 +1,17 @@
-resource "google_storage_bucket" "terraform_backend_bucket" {
-      location = "us-west1"
-      name = "terraform-state-e7h50yr3xnbzgr7ampqfwz1ob1fk3cvr0a8jr6sxtv5kc"
-      project = "PROJECTID"
+resource "aws_s3_bucket" "terraform_backend_bucket" {
+      bucket = "terraform-state-orb8rvjrv6mmm8hkoiyfluv5e8oc8sixaw3y7ek311lm1"
 }
 
 terraform {
   required_providers {
-    google =  {
-    source = "hashicorp/google"
-    version = ">= 4.10.0"
+    aws =  {
+    source = "hashicorp/aws"
+    version = ">= 2.7.0"
     }
   }
 }
 
-provider "google" {
-    project = "PROJECTID"
-    region = "us-west1"
+provider "aws" {
+    region = "us-west-2"
 }
 
