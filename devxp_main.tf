@@ -6,37 +6,37 @@ terraform {
   }
 }
 
-resource "aws_instance" "lennart" {
+resource "aws_instance" "len" {
       ami = data.aws_ami.ubuntu_latest.id
       instance_type = "t2.micro"
       tags = {
-        Name = "lennart"
+        Name = "len"
       }
       lifecycle {
         ignore_changes = [ami]
       }
 }
 
-resource "aws_iam_user" "lennart_iam" {
-      name = "lennart_iam"
+resource "aws_iam_user" "len_iam" {
+      name = "len_iam"
 }
 
-resource "aws_iam_user_policy_attachment" "lennart_iam_policy_attachment0" {
-      user = aws_iam_user.lennart_iam.name
-      policy_arn = aws_iam_policy.lennart_iam_policy0.arn
+resource "aws_iam_user_policy_attachment" "len_iam_policy_attachment0" {
+      user = aws_iam_user.len_iam.name
+      policy_arn = aws_iam_policy.len_iam_policy0.arn
 }
 
-resource "aws_iam_policy" "lennart_iam_policy0" {
-      name = "lennart_iam_policy0"
+resource "aws_iam_policy" "len_iam_policy0" {
+      name = "len_iam_policy0"
       path = "/"
-      policy = data.aws_iam_policy_document.lennart_iam_policy_document.json
+      policy = data.aws_iam_policy_document.len_iam_policy_document.json
 }
 
-resource "aws_iam_access_key" "lennart_iam_access_key" {
-      user = aws_iam_user.lennart_iam.name
+resource "aws_iam_access_key" "len_iam_access_key" {
+      user = aws_iam_user.len_iam.name
 }
 
-data "aws_iam_policy_document" "lennart_iam_policy_document" {
+data "aws_iam_policy_document" "len_iam_policy_document" {
       statement {
         actions = ["ec2:RunInstances", "ec2:AssociateIamInstanceProfile", "ec2:ReplaceIamInstanceProfileAssociation"]
         effect = "Allow"
@@ -45,7 +45,7 @@ data "aws_iam_policy_document" "lennart_iam_policy_document" {
       statement {
         actions = ["iam:PassRole"]
         effect = "Allow"
-        resources = [aws_instance.lennart.arn]
+        resources = [aws_instance.len.arn]
       }
 }
 
